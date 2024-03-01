@@ -37,6 +37,19 @@ app.get('/read/usernames', (req, res) => {
   res.send(usernames);
 });
 
+app.get('/read/username/:name', (req, res) => {
+  try {
+    let name = req.params.name;
+    let matching = users.filter(function(user) {
+      return user.username == name;
+    }); 
+    res.send(matching);
+  } catch (error) {
+    console.err(error);
+  }
+
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/write/adduser', addMsgToRequest);
@@ -50,6 +63,7 @@ app.post('/write/adduser', (req, res) => {
   });
   res.send('done');
 })
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
