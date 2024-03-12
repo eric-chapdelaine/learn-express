@@ -42,7 +42,7 @@ app.get('/read/username/:name', (req, res) => {
     let name = req.params.name;
     let matching = users.filter(function(user) {
       return user.username == name;
-    }); 
+    });
     res.send(matching);
   } catch (error) {
     console.err(error);
